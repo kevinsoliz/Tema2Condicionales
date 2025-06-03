@@ -12,6 +12,7 @@ public class Ejercicio06 {
                 valido = true;
             }catch(InputMismatchException e){
                 System.out.println("El numero introducido no es valido");
+                sc.next();
             }
         }
         return numero;

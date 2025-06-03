@@ -17,10 +17,13 @@ public class Ejercicio09 {
         }
         return numero;
     }
-    static String ordernarDecreciente(int a, int b){
-        return a > b ? a + ", " +  b : b + ", " + a;
+    static int ordernarDecreciente(int a, int b){
+        return a > b ? a : b;
     }
-
+    static int ordernarDecreciente(int a, int b, int c){
+        int mayor = ordernarDecreciente(a, b);
+        return ordernarDecreciente(c, mayor);
+    }
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int a = pedirNumero(sc);

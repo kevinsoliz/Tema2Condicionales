@@ -20,14 +20,30 @@ public class Ejercicio09 {
     static int ordernarDecreciente(int a, int b){
         return a > b ? a : b;
     }
-    static int ordernarDecreciente(int a, int b, int c){
-        int mayor = ordernarDecreciente(a, b);
-        return ordernarDecreciente(c, mayor);
+    static void ordernarDecreciente(int a, int b, int c){
+       int primer = ordernarDecreciente(a, b);
+       int mayor = 0;
+       int medio = 0;
+       int menor = 0;
+       if (primer >= c){
+           mayor = primer;
+           if (c > b){
+               medio = c;
+               menor = b;
+           }
+       } else if(primer <= c){
+           mayor = c;
+           medio = a;
+           menor = b;
+       }
+        System.out.println(mayor + ", " + medio + ", " + menor);
     }
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int a = pedirNumero(sc);
         int b = pedirNumero(sc);
-        System.out.println(ordernarDecreciente(a,b));
+        int c = pedirNumero(sc);
+        //System.out.println(ordernarDecreciente(a,b));
+        ordernarDecreciente(a, b, c);
     }
 }

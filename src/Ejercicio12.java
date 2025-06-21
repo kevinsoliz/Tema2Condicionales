@@ -21,11 +21,16 @@ public class Ejercicio12 {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int num = pedirNum(sc);
-        int contador = 0;
-        while(num != 0){
-            num %= 10;
-            contador++;
+        if(num >= 10_000 && num < 100_000){
+            System.out.println(num + " tiene cinco cifras.");
+        } else if (num >= 1000 && num < 10_000){
+            System.out.println(num + " tiene cuatro cifras.");
+        } else if (num >= 100 && num < 1000){
+            System.out.println(num + " tiene tres cifras.");
+        } else if (num >= 10 && num < 100){
+            System.out.println(num + " tiene dos cifras.");
+        } else if (num >= 0 && num < 10){
+            System.out.println(num + " tiene una cifra.");
         }
-        System.out.println("Hay " + contador + " cifras.");
     }
 }

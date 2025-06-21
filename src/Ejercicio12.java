@@ -19,6 +19,7 @@ public class Ejercicio12 {
         return num;
     }
     static int contarCifras (int num){
+        num = Math.abs(num); //  Y listo, ya puedes contar numeros negativos también.
         int cifras = 0;
         if (num == 0){
             cifras = 1;
@@ -30,6 +31,7 @@ public class Ejercicio12 {
         }
         return cifras;
     }
+    // Ahora, si tenemos que contar números negativos, conviertes el número introducido en valor absoluto
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int num = pedirNum(sc);

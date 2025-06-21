@@ -73,5 +73,11 @@ public class Ejercicio17 {
             }
         }
         System.out.printf("%02d-%02d-%02d", dia, mes, anio); //También funciona con /.
+        /*
+        % → Comienza un especificador de formato.
+        0 → Rellenar con ceros si el número tiene menos dígitos.
+        2 → Tamaño mínimo de dos dígitos.
+        d → Formato de número decimal entero (int, byte, short, etc.).
+        */
     }
 }

@@ -18,6 +18,18 @@ public class Ejercicio12 {
         }
         return num;
     }
+    static int contarCifras (int num){
+        int cifras = 0;
+        if (num == 0){
+            cifras = 1;
+        } else {
+            while (num > 0){
+                num /= 10;
+                cifras++;
+            }
+        }
+        return cifras;
+    }
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int num = pedirNum(sc);
@@ -32,5 +44,6 @@ public class Ejercicio12 {
         } else if (num >= 0 && num < 10){
             System.out.println(num + " tiene una cifra.");
         }
+        System.out.println("Tiene " + contarCifras(num) + " cifras.");
     }
 }

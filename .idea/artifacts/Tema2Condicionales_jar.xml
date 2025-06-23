@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="Tema2Condicionales:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/Tema2Condicionales_jar</output-path>
+    <root id="archive" name="Tema2Condicionales.jar">
+      <element id="module-output" name="Tema2Condicionales" />
+    </root>
+  </artifact>
+</component>

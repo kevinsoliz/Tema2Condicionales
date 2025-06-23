@@ -5,13 +5,14 @@ import java.util.Scanner;
 public class BreakAndContinueStatements {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        /*String input = "";
+        /*
+        String input = "";
         while (!input.equals("quit")) {
             System.out.println("Input: ");
             input = sc.nextLine().toLowerCase();
             System.out.println(input);
         }*/
-        //No queremos que quit salga también:
+        //No queremos que quit se imprima también:
         /*
         String input = "";
         while (!input.equals("quit")) {

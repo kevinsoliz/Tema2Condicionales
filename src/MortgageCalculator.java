@@ -3,23 +3,29 @@ import java.util.Locale;
 import java.util.Scanner;
 
 public class MortgageCalculator {
+    final static byte MONTHS_IN_YEAR = 12; //Se llaman fields: variable define at the class level.
+    final static byte PERCENT = 100;
+
     public static void main(String[] args) {
+        int principal = (int) readNumber("Principal ($1K - $1M): ", 1000, 1_000_000); //Aquí ya estamos casteando al tipo requerido.
+        float annualInterest = (float) readNumber("Annual Interest Rate: ", 0, 30);
+        byte years = (byte) readNumber("Period(Years): ", 0, 30);
 
-        //Ahora con métodos para que el código se vea más limpio:
-
-        int principal = (int)readNumber("Principal ($1K - $1M): ", 1000, 1_000_000); //Aquí ya estamos casteando al tipo requerido.
-        float annualInterest = (float)readNumber("Annual Interest Rate: ", 0, 30);
-        byte years = (byte)readNumber("Period(Years): ", 0, 30);
-
-        /*double mortgage = calculateMorgage(principal, annualInterest, years);
-
+        double mortgage = calculateMortgage(principal, annualInterest, years);
         String mortgageFormatted = NumberFormat.getCurrencyInstance(Locale.US).format(mortgage);
-        System.out.println("Mortgage: " + mortgageFormatted);*/
-        calculateMortgage(principal, annualInterest, years);
-    }
-    //Ahora vamos a cargarnos los while loops, pero hay un problema en cada while solicitamos un tipo diferente,
-    //crear tres métodos distintos no sería la solución... usaremos un casting:
+        System.out.println();
+        System.out.println("MORTGAGE");
+        System.out.println("--------");
+        System.out.println("Monthly Payments: " + mortgageFormatted);
 
+        System.out.println();
+        System.out.println("PAYMENT SCHEDULE");
+        System.out.println("----------------");
+        for(short month = 1; month <= years * MONTHS_IN_YEAR; month++ ) {
+            double balance = calculateBalance(principal, annualInterest, years, month);
+            System.out.println(NumberFormat.getCurrencyInstance(Locale.US).format(balance));
+        }
+    }
     public static double readNumber(String prompt, double min, double max ){
         Scanner sc = new Scanner(System.in);
         double value; // una variable genérica para almacenar el valor.
@@ -32,31 +38,20 @@ public class MortgageCalculator {
         }
         return value;
     }
-
-    public static void calculateMortgage(int principal, float annualInterest, byte years) {
-        final byte MONTHS_IN_YEAR = 12;
-        final byte PERCENT = 100;
-
+    public static double calculateMortgage(int principal, float annualInterest, byte years) {
         float monthlyInterest = annualInterest / PERCENT / MONTHS_IN_YEAR;
         short numberOfPayments = (short) (years * MONTHS_IN_YEAR);
         double mortgage = principal
                 * (monthlyInterest * Math.pow(1 + monthlyInterest, numberOfPayments))
                 / (Math.pow(1 + monthlyInterest, numberOfPayments) - 1);
-        System.out.println("MORTGAGE");
-        System.out.println("--------");
-        System.out.println("Monthly Payments: " + NumberFormat.getCurrencyInstance(Locale.US).format(mortgage) + "\n");
-        System.out.println("PAYMENT SCHEDULE");
-        System.out.println("----------------");
-
-        double debt = 0;
-        for (int i = 1; i <= numberOfPayments; i++) {
-            debt = principal
-                    * (Math.pow(1 + monthlyInterest, numberOfPayments) - Math.pow(1 + monthlyInterest, i))
-                    / (Math.pow(1 + monthlyInterest, numberOfPayments) - 1);
-            System.out.println(NumberFormat.getCurrencyInstance(Locale.US).format(debt));
-        }
-
-
-
+        return mortgage;
+    }
+    public static double calculateBalance(int principal, float annualInterest, byte years, short numberOfPaymentsMade){
+        float monthlyInterest = annualInterest / PERCENT / MONTHS_IN_YEAR;
+        short numberOfPayments = (short) (years * MONTHS_IN_YEAR);
+        double balance = principal
+                * (Math.pow(1 + monthlyInterest, numberOfPayments) - Math.pow(1 + monthlyInterest, numberOfPaymentsMade))
+                / (Math.pow(1 + monthlyInterest, numberOfPayments) - 1);
+        return balance;
     }
 }

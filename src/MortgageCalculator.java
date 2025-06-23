@@ -11,10 +11,11 @@ public class MortgageCalculator {
         float annualInterest = (float)readNumber("Annual Interest Rate: ", 0, 30);
         byte years = (byte)readNumber("Period(Years): ", 0, 30);
 
-        double mortgage = calculateMorgage(principal, annualInterest, years);
+        /*double mortgage = calculateMorgage(principal, annualInterest, years);
 
         String mortgageFormatted = NumberFormat.getCurrencyInstance(Locale.US).format(mortgage);
-        System.out.println("Mortgage: " + mortgageFormatted);
+        System.out.println("Mortgage: " + mortgageFormatted);*/
+        calculateMortgage(principal, annualInterest, years);
     }
     //Ahora vamos a cargarnos los while loops, pero hay un problema en cada while solicitamos un tipo diferente,
     //crear tres métodos distintos no sería la solución... usaremos un casting:
@@ -32,15 +33,30 @@ public class MortgageCalculator {
         return value;
     }
 
-    public static double calculateMorgage(int principal, float annualInterest, byte years){
+    public static void calculateMortgage(int principal, float annualInterest, byte years) {
         final byte MONTHS_IN_YEAR = 12;
         final byte PERCENT = 100;
 
         float monthlyInterest = annualInterest / PERCENT / MONTHS_IN_YEAR;
-        short numberOfPayments = (short)(years * MONTHS_IN_YEAR);
+        short numberOfPayments = (short) (years * MONTHS_IN_YEAR);
         double mortgage = principal
                 * (monthlyInterest * Math.pow(1 + monthlyInterest, numberOfPayments))
                 / (Math.pow(1 + monthlyInterest, numberOfPayments) - 1);
-        return mortgage;
+        System.out.println("MORTGAGE");
+        System.out.println("--------");
+        System.out.println("Monthly Payments: " + NumberFormat.getCurrencyInstance(Locale.US).format(mortgage) + "\n");
+        System.out.println("PAYMENT SCHEDULE");
+        System.out.println("----------------");
+
+        double debt = 0;
+        for (int i = 1; i <= numberOfPayments; i++) {
+            debt = principal
+                    * (Math.pow(1 + monthlyInterest, numberOfPayments) - Math.pow(1 + monthlyInterest, i))
+                    / (Math.pow(1 + monthlyInterest, numberOfPayments) - 1);
+            System.out.println(NumberFormat.getCurrencyInstance(Locale.US).format(debt));
+        }
+
+
+
     }
 }

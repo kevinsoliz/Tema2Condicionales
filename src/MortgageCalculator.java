@@ -11,13 +11,26 @@ public class MortgageCalculator {
         float annualInterest = (float) readNumber("Annual Interest Rate: ", 0, 30);
         byte years = (byte) readNumber("Period(Years): ", 0, 30);
 
+        printMortgage(principal, annualInterest, years);
+        printPaymentSchedule(years, principal, annualInterest);
+    }
+
+    private static void printMortgage(int principal, float annualInterest, byte years) {
         double mortgage = calculateMortgage(principal, annualInterest, years);
         String mortgageFormatted = NumberFormat.getCurrencyInstance(Locale.US).format(mortgage);
         System.out.println();
         System.out.println("MORTGAGE");
         System.out.println("--------");
         System.out.println("Monthly Payments: " + mortgageFormatted);
+    }
+    /*
+    Recuerda:
+    Keep your methods shor. Entre 5 y 10 linea y max 20.
+    Extract repetitive patterns
+    Extract highly related statements
+    */
 
+    private static void printPaymentSchedule(byte years, int principal, float annualInterest) {
         System.out.println();
         System.out.println("PAYMENT SCHEDULE");
         System.out.println("----------------");
@@ -26,6 +39,7 @@ public class MortgageCalculator {
             System.out.println(NumberFormat.getCurrencyInstance(Locale.US).format(balance));
         }
     }
+
     public static double readNumber(String prompt, double min, double max ){
         Scanner sc = new Scanner(System.in);
         double value; // una variable genérica para almacenar el valor.
